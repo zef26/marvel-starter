@@ -76,7 +76,6 @@ const CharSearchForm = () => {
                     <div className="inner">find</div>
 
                 </button>
-
             </div>
 
             <ErrorMessage component="div" className="char_search-error" name="charName"/>
