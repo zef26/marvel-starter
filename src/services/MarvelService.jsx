@@ -7,7 +7,7 @@ const useMarvelService = () => {
   // Определяем API-базу
   const isLocalhost = window.location.hostname === "localhost";
   const _apiBase = isLocalhost
-    ? "" // Пусть CRA proxy из package.json перехватывает
+    ? "" 
     : "https://marvel-server-zeta.vercel.app";
 
   const _apiKey = "apikey=d4eecb0c66dedbfae4eab45d312fc1df";
