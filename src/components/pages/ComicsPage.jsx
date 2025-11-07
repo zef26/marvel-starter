@@ -6,7 +6,7 @@ import AppBanner from "../appBanner/AppBanner";
 
 
 const ComicsPage = () => {
-  return (
+  return ( 
     <>
       <Helmet>
         <meta
@@ -20,5 +20,5 @@ const ComicsPage = () => {
     </>
   )
 }
-
+   
 export default ComicsPage
