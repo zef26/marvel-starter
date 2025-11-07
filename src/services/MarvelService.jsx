@@ -2,7 +2,7 @@ import { useHttp } from "../hooks/http.hook";
 
 
 const useMarvelService = () => {
-  const { loading, request, error, clearError } = useHttp();
+  const { loading, request, error, clearError, process } = useHttp();
 
   // Определяем API-базу
   const isLocalhost = window.location.hostname === "localhost";
@@ -77,7 +77,8 @@ const useMarvelService = () => {
     getCharacter,
     getAllComics,
     getComic,
-    getCharacterByName
+    getCharacterByName,
+    process
   };
 };
 
