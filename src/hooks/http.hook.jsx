@@ -25,7 +25,7 @@ export const useHttp = () => {
             return data;
         } catch(e) {
             setLoading(false);
-            setError(e.message);
+            setError(e.message);  
             setProcess('error');
             throw e;
         }
@@ -34,7 +34,7 @@ export const useHttp = () => {
     const clearError = useCallback(() => {
         setError(null);
         setProcess('loading');
-    }, []);
+    }, []); 
 
     return {loading, request, error, clearError, process}
 }
