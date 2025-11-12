@@ -2,19 +2,18 @@ import { useParams } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 
 import useMarvelService from '../../services/MarvelService';
-import Spinner from '../spinner/Spinner';
-import ErrorMessage from '../errorMessage/ErrorMessage';
 import AppBanner from "../appBanner/AppBanner";
+import setContent from '../../utils/setContent';
 
 const SinglePage = ({ Component, dataType }) => {
     const { id } = useParams();
     const [data, setData] = useState(null);
-    const { loading, error, getComic, getCharacter, clearError } = useMarvelService();
+    const {  getComic, getCharacter, clearError, process, setProcess } = useMarvelService();
 
     useEffect(() => {
         if (!id) return;
         updateData();
-        // eslint-disable-next-line react-hooks/exhaustive-deps
+        
     }, [id]);
 
     const updateData = async () => {
@@ -23,9 +22,11 @@ const SinglePage = ({ Component, dataType }) => {
         try {
             let result;
             if (dataType === 'comic') {
-                result = await getComic(id);
+                result = await getComic(id)
+                .then(() => setProcess('confirmed'));
             } else if (dataType === 'character') {
-                result = await getCharacter(id);
+                result = await getCharacter(id)
+                .then(() => setProcess('confirmed'));
             }
             setData(result);
         } catch (e) {
@@ -33,16 +34,12 @@ const SinglePage = ({ Component, dataType }) => {
         }
     };
 
-    const errorMessage = error ? <ErrorMessage /> : null;
-    const spinner = loading ? <Spinner /> : null;
-    const content = !(loading || error || !data) ? <Component data={data} /> : null;
+
 
     return (
         <>
             <AppBanner />
-            {errorMessage}
-            {spinner}
-            {content}
+            {setContent(process, Component, data)}
         </>
     );
 };
